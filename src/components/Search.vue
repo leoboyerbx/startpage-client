@@ -16,7 +16,7 @@
         v-model="query"
         @input="updateQuery"
       >
-      <div class="mr-5 text-sm text-gray-300">
+      <div class="mr-5 text-sm text-gray-300 hidden sm:block">
         <span class="keyhint">ENTER</span> to search, <span class="keyhint">ESC</span> to Grepp'
       </div>
     </section>
