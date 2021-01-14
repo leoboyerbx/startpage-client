@@ -1,6 +1,5 @@
 <template>
-  <form class="flex flex-col search-input flex-grow text-lg text-gray-500 border border-gray-200
-    focus-within:shadow-xl hover:shadow-xl transition-shadow overflow-hidden"
+  <form class="search-bar"
         @submit.prevent="submitQuery(query)"
         @keydown.down.prevent="nextSuggestion"
         @keydown.up.prevent="prevSuggestion"
@@ -138,5 +137,13 @@ export default {
 .keyhint {
   //@apply bg-gray-200 py-1 px-2 rounded text-white;
   @apply border py-1 px-2 rounded;
+}
+
+.search-bar {
+  @apply flex flex-col search-input flex-grow text-lg text-gray-500 border border-gray-200 transition-all overflow-hidden max-w-3xl mx-auto bg-white;
+}
+.search-bar:hover, .search-bar:focus-within {
+  box-shadow:  0 0 25px rgba(0, 0, 0, 0.15);
+  border-color: transparent;
 }
 </style>

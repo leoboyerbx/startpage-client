@@ -1,19 +1,26 @@
 <template>
-  <div id="app" class="container mx-auto">
-    <header class="mx-auto mt-10 px-5 content-center">
+  <div id="app" class="container mx-auto px-5 relative">
+    <header class="mx-auto mt-10 content-center relative z-10">
       <h1 class="font-bold text-center w-auto text-yeleo text-8xl mb-10">...start !</h1>
-      <Search />
+      <section class="search-wrapper">
+        <Search />
+      </section>
     </header>
+    <main class="my-10">
+      <Tools />
+    </main>
   </div>
 </template>
 
 <script>
 
 import Search from '@/components/Search'
+import Tools from '@/components/Tools/Tools'
 
 export default {
   name: 'App',
   components: {
+    Tools,
     Search
   }
 }
@@ -28,6 +35,10 @@ body {
 
 #app {
   font-family: arboria, sans-serif;
+}
+
+.search-wrapper {
+  height: 50px;
 }
 
 </style>

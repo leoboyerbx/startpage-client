@@ -1,14 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './index.css'
+import config from '@/mixins/config'
 // import axios from 'axios'
 
 Vue.config.productionTip = false
+Vue.mixin(config)
 
 new Vue({
   render: h => h(App)
 }).$mount('#app')
-
-// axios.get('http://localhost:1337/categories').then(response => {
-//   console.log(response)
-// })
