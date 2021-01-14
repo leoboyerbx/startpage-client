@@ -49,12 +49,14 @@ export default {
     hideSuggestions: false
   }),
   watch: {
+    query (newVal) {
+      this.$emit('update', newVal)
+    }
   },
   computed: {
   },
   methods: {
     formatSuggestion (suggestion) {
-      console.log(this.baseQuery)
       if (suggestion.startsWith(this.baseQuery)) {
         suggestion = `${this.baseQuery}<span class="font-medium">${suggestion.slice(this.baseQuery.length)}</span>`
       } else {
