@@ -53,10 +53,11 @@ export default {
     query () {
       this.getAnswers()
     },
-    answers () {
+    answers (newVal) {
       this.$nextTick(() => {
         Prism.highlightAll()
       })
+      this.$emit('hasAnswers', !!(newVal.length))
     }
   },
   computed: {

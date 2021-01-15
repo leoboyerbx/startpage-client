@@ -3,7 +3,7 @@
     <header class="mx-auto mt-10 content-center relative z-10">
       <h1 class="font-bold text-center w-auto text-yeleo text-8xl mb-10">...start !</h1>
       <section class="search-wrapper">
-        <Search @update="searchQuery = $event" :has-answers="hasAnswers" />
+        <Search @update="searchQuery = $event; hasAnswers = false" :has-answers="hasAnswers" />
       </section>
     </header>
     <main class="my-10">
