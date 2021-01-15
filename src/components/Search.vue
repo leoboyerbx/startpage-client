@@ -1,6 +1,6 @@
 <template>
   <form class="search-bar"
-        @submit.prevent="submitQuery(query)"
+        @submit.prevent="submitQuery(queryToSubmit)"
         @keydown.down.prevent="nextSuggestion"
         @keydown.up.prevent="prevSuggestion"
         @keyup.prevent.esc="hideSuggestions = !hideSuggestions"
@@ -33,16 +33,17 @@
          @click="submitQuery(suggestion)"
          @mouseover="selectedSuggestion = i"
       >
-        <i class="fas fa-search ml-5 fa-sm"></i>
-        <span class="text-gray-900 mx-4 py-2 font-light" v-html="formatSuggestion(suggestion)"></span>
+        <img v-if="suggestion.icon" :src="apiEndPoint + suggestion.icon.url" class="ml-5" style="width: 16px; height: 16px;" alt="s">
+        <i v-else class="fas fa-search ml-5 fa-sm"></i>
+        <span class="text-gray-900 mx-4 py-2 font-light" v-html="formatSuggestion(suggestion.title)"></span>
       </a>
     </section>
   </form>
 </template>
 
 <script>
-// import duckduckgoApi from '@/api/duckduckgoApi'
 import googleSuggestApi from '@/api/googleSuggestApi'
+import toolsApi from '@/api/toolsApi'
 
 export default {
   name: 'Search',
@@ -51,7 +52,8 @@ export default {
     baseQuery: '',
     suggestions: [],
     selectedSuggestion: null,
-    hideSuggestions: false
+    hideSuggestions: false,
+    links: null
   }),
   props: {
     hasAnswers: {
@@ -60,16 +62,29 @@ export default {
       default: false
     }
   },
+  async created () {
+    this.links = await toolsApi.getAll()
+  },
   watch: {
     query (newVal) {
       this.$emit('update', newVal)
+      this.hideSuggestions = false
     }
   },
   computed: {
+    queryToSubmit () {
+      if (this.selectedSuggestion === null) {
+        return {
+          title: this.query
+        }
+      } else {
+        return this.suggestions[this.selectedSuggestion]
+      }
+    }
   },
   methods: {
     formatSuggestion (suggestion) {
-      if (suggestion.startsWith(this.baseQuery)) {
+      if (suggestion.toLowerCase().startsWith(this.baseQuery.toLowerCase())) {
         suggestion = `${this.baseQuery}<span class="font-medium">${suggestion.slice(this.baseQuery.length)}</span>`
       } else {
         suggestion = `<span class="font-medium">${suggestion}</span>`
@@ -77,9 +92,15 @@ export default {
       return suggestion
     },
     submitQuery (query) {
+      let url
+      if (query.URL) {
+        url = query.URL
+      } else {
+        url = `https://www.google.com/search?q=${query.title}`
+      }
       this.query = ''
       this.updateQuery()
-      window.open(`https://www.google.com/search?q=${query}`, '_blank')
+      window.open(url, '_blank')
     },
     nextSuggestion () {
       if (this.suggestions.length) {
@@ -89,7 +110,7 @@ export default {
           } else {
             this.selectedSuggestion++
           }
-          this.query = this.suggestions[this.selectedSuggestion]
+          this.query = this.suggestions[this.selectedSuggestion].title
         } else {
           this.selectedSuggestion = null
           this.query = this.baseQuery
@@ -104,7 +125,7 @@ export default {
           } else {
             this.selectedSuggestion--
           }
-          this.query = this.suggestions[this.selectedSuggestion]
+          this.query = this.suggestions[this.selectedSuggestion].title
         } else {
           this.selectedSuggestion = null
           this.query = this.baseQuery
@@ -113,8 +134,16 @@ export default {
     },
     updateQuery () {
       if (this.query.length) {
+        this.suggestions = this.links.filter(link => {
+          return (link.title.toLowerCase().includes(this.query.toLowerCase()))
+        })
+
         googleSuggestApi.getSuggestions(this.query).then(suggestions => {
-          this.suggestions = suggestions
+          suggestions.forEach(suggestion => {
+            this.suggestions.push({
+              title: suggestion
+            })
+          })
           this.baseQuery = this.query
           this.selectedSuggestion = null
         })

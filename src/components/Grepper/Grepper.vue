@@ -57,7 +57,7 @@ export default {
       this.$nextTick(() => {
         Prism.highlightAll()
       })
-      this.$emit('hasAnswers', !!(newVal.length))
+      this.$emit('hasAnswers', newVal ? !!(newVal.length) : false)
     }
   },
   computed: {
