@@ -3,11 +3,11 @@
     <header class="mx-auto mt-10 content-center relative z-10">
       <h1 class="font-bold text-center w-auto text-yeleo text-8xl mb-10">...start !</h1>
       <section class="search-wrapper">
-        <Search @update="searchQuery = $event" />
+        <Search @update="searchQuery = $event" :has-answers="hasAnswers" />
       </section>
     </header>
     <main class="my-10">
-      <Grepper :query="searchQuery" />
+      <Grepper :query="searchQuery" @hasAnswers="hasAnswers = $event" />
       <Tools />
     </main>
   </div>
@@ -22,7 +22,8 @@ import Grepper from '@/components/Grepper/Grepper'
 export default {
   name: 'App',
   data: () => ({
-    searchQuery: ''
+    searchQuery: '',
+    hasAnswers: false
   }),
   components: {
     Grepper,

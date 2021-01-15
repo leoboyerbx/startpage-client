@@ -17,7 +17,10 @@
         @input="updateQuery"
       >
       <div class="mr-5 text-sm text-gray-300 hidden sm:block">
-        <span class="keyhint">ENTER</span> to search, <span class="keyhint">ESC</span> to Grepp'
+        <span class="keyhint">ENTER</span> to search,
+        <span class=" transition-all duration-200" :class="{ 'text-yeleo': hasAnswers }">
+          <span class="keyhint transition-all duration-200" :class="{ 'border-transparent bg-yeleo text-white': hasAnswers }">ESC</span> to Grepp'
+        </span>
       </div>
     </section>
     <section v-show="suggestions.length && !hideSuggestions" class="flex flex-col suggestions-wrapper pb-3" @mouseout="selectedSuggestion = null">
@@ -48,6 +51,13 @@ export default {
     selectedSuggestion: null,
     hideSuggestions: false
   }),
+  props: {
+    hasAnswers: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
   watch: {
     query (newVal) {
       this.$emit('update', newVal)

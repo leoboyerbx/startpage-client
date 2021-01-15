@@ -10,27 +10,25 @@
       <button class="window-button bg-yellow-400 mr-auto ml-2" @click="extended = !extended">
         <span class="button-minus">-</span>
       </button>
-      <a v-if="answer.source_url" :href="answer.source_url" title="Source" target="_blank" class="text-indigo-50 opacity-50 hover:opacity-100 transition">
+      <a v-if="answer.source_url" :href="answer.source_url" title="Source" target="_blank" class="text-indigo-50 hover:opacity-100 transition" :class="extended ? 'opacity-50' : 'opacity-0'">
         <i class="fas fa-external-link-alt"></i>
       </a>
     </header>
     <main :style="{ maxHeight }" class="transition-all duration-300">
-      <prism
+      <pre
         ref="content"
-        :language="language"
         style="background-color: transparent"
         class="prism-wrapper"
-      >{{ answer.answer || '' }}</prism>
+      ><code :class="'language-' + language">{{ answer.answer }}</code></pre>
     </main>
   </div>
 </template>
 
 <script>
-import Prism from 'vue-prism-component'
 
 export default {
   name: 'GrepperAnswer',
-  components: { Prism },
+  components: {},
   props: ['answer', 'language'],
   data: () => ({
     extended: true,
