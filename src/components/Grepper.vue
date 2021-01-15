@@ -1,10 +1,9 @@
 <template>
-  <section class="my-5">
-    <header class="flex flex-row justify-between items-center">
-      <h2 class="text-4xl font-bold text-gray-700"><i class="fas fa-file-code transform scale-75 inline-block mr-2"></i>Grepper results</h2>
-    </header>
+  <section class="my-10 py-5">
     <main class="my-5 grid gap-x-4 gap-y-6 items-start">
-      {{ query }}
+      <pre v-for="(answer, i) in answers" :key="i">
+        {{ answer.answer }}
+      </pre>
     </main>
   </section>
 </template>
@@ -22,7 +21,9 @@ export default {
       required: false
     }
   },
-  data: () => ({}),
+  data: () => ({
+    answers: []
+  }),
   watch: {
     query () {
       this.getAnswers()
@@ -33,6 +34,7 @@ export default {
       return debounce(async () => {
         const response = await grepperApi.query(this.query)
         console.log(response)
+        this.answers = response.answers
       }, 250)
     }
   }

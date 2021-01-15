@@ -66,6 +66,7 @@ export default {
     },
     submitQuery (query) {
       this.query = ''
+      this.updateQuery()
       window.open(`https://www.google.com/search?q=${query}`, '_blank')
     },
     nextSuggestion () {
