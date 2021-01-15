@@ -12,8 +12,11 @@
     "core-js": "^3.6.5",
     "lodash.debounce": "^4.0.8",
     "postcss": "^8.2.4",
+    "prismjs": "^1.23.0",
     "tailwindcss": "^2.0.1-compat",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-code-highlight": "^0.7.6",
+    "vue-prism-component": "1.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

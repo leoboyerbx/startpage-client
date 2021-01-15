@@ -12,7 +12,7 @@ module.exports = {
       gray: colors.trueGray,
       indigo: colors.indigo,
       red: colors.red,
-      // yellow: colors.yellow,
+      yellow: colors.yellow,
       yeleo: {
         light: '#ffea92',
         DEFAULT: '#fce14b',

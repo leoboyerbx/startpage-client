@@ -17,7 +17,7 @@
 
 import Search from '@/components/Search'
 import Tools from '@/components/Tools/Tools'
-import Grepper from '@/components/Grepper'
+import Grepper from '@/components/Grepper/Grepper'
 
 export default {
   name: 'App',
