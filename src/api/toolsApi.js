@@ -2,9 +2,10 @@ import axios from 'axios'
 import config from '@/config/config'
 
 const toolsApi = {
-  endPoint: config.apiEndPoint,
+  endPoint: config.apiEndPoint + '/',
 
   async getCategories () {
+    console.log(this.endPoint)
     const response = await axios.get(this.endPoint + 'categories')
     return response.data
   },
