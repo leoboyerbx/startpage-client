@@ -1,7 +1,7 @@
-const config = {
-  data: () => ({
-    apiEndPoint: 'http://localhost:1337'
-  })
+import config from '@/config/config'
+
+const configMixin = {
+  data: () => (config)
 }
 
-export default config
+export default configMixin

@@ -1,7 +1,8 @@
 import axios from 'axios'
+import config from '@/config/config'
 
 const toolsApi = {
-  endPoint: 'http://localhost:1337/',
+  endPoint: config.apiEndPoint,
 
   async getCategories () {
     const response = await axios.get(this.endPoint + 'categories')
