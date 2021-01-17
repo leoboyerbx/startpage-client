@@ -4,12 +4,12 @@ import './index.css'
 
 import config from '@/mixins/config'
 import store from './store'
-import { clickOutside } from '@/directives/clickOutside'
+import { directive as clickAway } from 'vue-clickaway'
 // import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.mixin(config)
-Vue.directive('click-outside', clickOutside)
+Vue.directive('clickAway', clickAway)
 
 new Vue({
   store,

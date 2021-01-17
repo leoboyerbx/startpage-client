@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="m-0 p-0 w-full min-h-full absolute" :class="{ 'bg-gray-900': dark, dark }">
+  <div id="app" class="m-0 p-0 w-full min-h-full absolute" :class="{ 'bg-gray-900': dark, dark, 'theme-transition': $store.state.themeTransition }">
     <div class="container mx-auto max-w-6xl px-10 relative">
       <header class="mx-auto mt-10 pt-10 content-center relative z-10">
         <h1 class="font-bold text-center w-auto text-yeleo text-8xl mb-10 dark:text-yeleo-light">...start !</h1>
@@ -27,9 +27,13 @@ export default {
   name: 'App',
   data: () => ({
     searchQuery: '',
-    hasAnswers: false,
-    dark: false
+    hasAnswers: false
   }),
+  computed: {
+    dark () {
+      return this.$store.getters.dark
+    }
+  },
   components: {
     Settings,
     Grepper,
@@ -49,6 +53,11 @@ body {
 
 #app {
   font-family: arboria, sans-serif;
+  &.theme-transition {
+    * {
+      transition: all .2s ease 0s !important;
+    }
+  }
 }
 
 .search-wrapper {
