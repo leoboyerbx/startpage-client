@@ -1,16 +1,18 @@
 <template>
-  <div id="app" class="container mx-auto max-w-6xl px-10 relative" :class="{ dark }">
-    <header class="mx-auto mt-10 pt-10 content-center relative z-10 dark:bg-gray-900">
-      <h1 class="font-bold text-center w-auto text-yeleo text-8xl mb-10">...start !</h1>
-      <section class="search-wrapper">
-        <Search @update="searchQuery = $event; hasAnswers = false" :has-answers="hasAnswers" />
-      </section>
-    </header>
-    <main class="my-10">
-      <Grepper :query="searchQuery" @hasAnswers="hasAnswers = $event" />
-      <Tools />
-    </main>
-    <Settings class="z-20" />
+  <div id="app" class="m-0 p-0 w-full min-h-full absolute" :class="{ 'bg-gray-900': dark, dark }">
+    <div class="container mx-auto max-w-6xl px-10 relative">
+      <header class="mx-auto mt-10 pt-10 content-center relative z-10">
+        <h1 class="font-bold text-center w-auto text-yeleo text-8xl mb-10 dark:text-yeleo-light">...start !</h1>
+        <section class="search-wrapper">
+          <Search @update="searchQuery = $event; hasAnswers = false" :has-answers="hasAnswers" />
+        </section>
+      </header>
+      <main class="my-10">
+        <Grepper :query="searchQuery" @hasAnswers="hasAnswers = $event" />
+        <Tools />
+      </main>
+      <Settings class="z-20" />
+    </div>
   </div>
 </template>
 
