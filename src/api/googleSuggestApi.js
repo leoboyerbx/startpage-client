@@ -1,7 +1,7 @@
 // import axios from 'axios'
 
 const googleSuggestApi = {
-  endPoint: 'http://suggestqueries.google.com/complete/search',
+  endPoint: 'https://suggestqueries.google.com/complete/search',
   callback: 'autocompleteCallback',
   async getSuggestions (query) {
     return new Promise(resolve => {
