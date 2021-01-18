@@ -16,7 +16,7 @@
         v-model="query"
         @input="updateQuery"
       >
-      <div class="mr-5 text-sm text-gray-300 hidden sm:block">
+      <div class="mr-5 text-sm text-gray-300 hidden pointer-events-none select-none sm:block">
         <span class=" transition-all duration-200" :class="{ 'text-yeleo': query.length > 0 }">
           <span class="keyhint transition-all duration-200" :class="{ 'border-transparent bg-yeleo text-white': query.length > 0 }">ENTER</span> to search,
         </span>
